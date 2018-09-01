@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 export default class Button extends Component {
   render() {
@@ -11,7 +11,7 @@ export default class Button extends Component {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   button: {
     marginTop: 20,
     borderRadius: 5,
@@ -28,4 +28,4 @@ const styles = {
     paddingLeft: 20,
     paddingRight: 20
   }
-};
+});

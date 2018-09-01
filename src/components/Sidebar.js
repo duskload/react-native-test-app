@@ -5,29 +5,23 @@ import { Actions } from 'react-native-router-flux';
 
 export default class Sidebar extends Component {
   render() {
+    const { container, listContainer } = styles;
     return (
-      <View style={{ flex: 1 }}>
-        
-        <View style={{ flex: 2}}>
-        <Content>
-          <List>
-            <ListItem>
-              <Text onPress={() => Actions.home()}>
-                Home
-              </Text>
-            </ListItem>
-            <ListItem>
-              <Text onPress={() => Actions.stack()}>
-                StackOverflow
-              </Text>
-            </ListItem>
-            <ListItem>
-              <Text onPress={() => Actions.logout()}>
-                LogOut
-              </Text>
-            </ListItem>
-          </List>
-        </Content>
+      <View style={container}>
+        <View style={listContainer}>
+          <Content>
+            <List>
+              <ListItem>
+                <Text onPress={() => Actions.home()}>Home</Text>
+              </ListItem>
+              <ListItem>
+                <Text onPress={() => Actions.stack()}>StackOverflow</Text>
+              </ListItem>
+              <ListItem>
+                <Text onPress={() => Actions.logout()}>LogOut</Text>
+              </ListItem>
+            </List>
+          </Content>
         </View>
       </View>
     );
@@ -36,9 +30,10 @@ export default class Sidebar extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: '#fff'
   },
-  welcome: {
-    fontSize: 24
+  listContainer: {
+    flex: 2
   }
 });

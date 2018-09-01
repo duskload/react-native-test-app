@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
-import Button from './controls/Button';
+import Button from './common/Button';
 
 export default class LogOut extends Component {
   handleLogOut = () => { Actions.login(); };

@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "android": "react-native run-android",
+    "android": "react-native run-android && react-native log-android",
     "ios": "react-native run-ios",
     "test": "jest"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "native-base": "^2.8.0",
+    "prop-types": "^15.6.2",
     "react": "16.3.1",
     "react-native": "^0.55.4",
     "react-native-router-flux": "^4.0.1",
