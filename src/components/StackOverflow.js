@@ -9,6 +9,8 @@ import { AppList, Spinner, Button, Icon } from './common';
 
 import { getStackOverflowTopics } from '../actions/stackoverflow';
 
+const isEven = number => number % 2 === 0;
+
 class StackOverflow extends Component {
   componentDidMount() {
     this.props.getStackOverflowTopics();
@@ -16,8 +18,15 @@ class StackOverflow extends Component {
 
   handleRefresh = () => this.props.getStackOverflowTopics();
 
-  renderListItem = ({ item }) => {
-    return <ListItem key={item.title} title={item.title} hideChevron />;
+  renderListItem = ({ item, index }) => {
+    return (
+      <ListItem
+        key={item.title}
+        title={item.title}
+        containerStyle={{ backgroundColor: isEven(index) ? '#ddd' : '#fff' }}
+        hideChevron
+      />
+    );
   };
 
   renderFlatList = () => {
