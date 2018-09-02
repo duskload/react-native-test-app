@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import Input from './common/Input';
-import Button from './common/Button';
-import Spinner from './common/Spinner';
+import { Input, Button, Spinner } from './common';
 
 import { loginUser, changePassword, changeLogin } from '../actions/auth';
 
@@ -24,6 +22,7 @@ class LoginForm extends Component {
             onChangeText={this.onLoginChange}
             value={this.props.login}
           />
+
           <Input
             iconName="lock"
             placeholder="password"
@@ -31,8 +30,15 @@ class LoginForm extends Component {
             onChangeText={this.onPasswordChange}
             value={this.props.password}
           />
+
           <Text style={styles.errorCodeStyle}>{this.props.error}</Text>
-          {this.props.isLoading ? <Spinner /> : <Button onPress={this.handleLogin}>Log In</Button>}
+          <View style={{ marginTop: 25 }}>
+            {this.props.isLoading ? (
+              <Spinner />
+            ) : (
+              <Button onPress={this.handleLogin}>Log In</Button>
+            )}
+          </View>
         </View>
       </View>
     );
@@ -47,7 +53,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF'
   },
   welcome: {
-    fontSize: 24
+    marginBottom: 25,
+    fontSize: 28
   },
   loginForm: {
     display: 'flex',

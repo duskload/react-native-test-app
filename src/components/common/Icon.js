@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default class AppIcon extends Component {
   static defaultProps = {
     size: 30,
-    color: '#000'
+    color: '#189ad3'
   };
   static propTypes = {
     name: PropTypes.string.isRequired,

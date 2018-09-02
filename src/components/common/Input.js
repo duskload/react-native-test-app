@@ -7,7 +7,7 @@ const Input = ({ secureTextEntry, onChangeText, value, placeholder, iconName }) 
     <View style={styles.container}>
       {iconName && (
         <View style={styles.iconContainer}>
-          <AppIcon name={iconName} size={30} color="#000" />
+          <AppIcon name={iconName} size={30} />
         </View>
       )}
       <TextInput
@@ -33,16 +33,18 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
+    borderRadius: 5,
     borderColor: 'gray',
     borderWidth: 1,
-    width: '75%'
+    width: '75%',
+    padding: 5
   },
   text: {
     margin: 10,
     fontSize: 24
   },
   iconContainer: {
-    marginRight: 5
+    marginRight: 7
   }
 });
 

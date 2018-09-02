@@ -5,7 +5,7 @@ export default class Button extends Component {
   render() {
     return (
       <TouchableOpacity style={styles.button} onPress={this.props.onPress}>
-        <Text style={styles.text}>{this.props.children}</Text>
+        <Text style={[styles.text, this.props.textColor]}>{this.props.children}</Text>
       </TouchableOpacity>
     );
   }
@@ -13,14 +13,13 @@ export default class Button extends Component {
 
 const styles = StyleSheet.create({
   button: {
-    marginTop: 20,
     borderRadius: 5,
-    borderColor: '#000',
+    borderColor: 'gray',
     borderWidth: 1
   },
   text: {
     alignSelf: 'center',
-    color: '#000',
+    color: '#189ad3',
     fontSize: 16,
     fontWeight: '500',
     paddingTop: 10,

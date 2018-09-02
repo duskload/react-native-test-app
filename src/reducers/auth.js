@@ -5,7 +5,8 @@ import {
   SUCCESS,
   LOADING,
   FAILURE,
-  LOG_OUT
+  LOG_OUT,
+  CLEAR_ERROR
 } from '../actions/constants';
 
 const initialState = {
@@ -26,11 +27,20 @@ export default (state = initialState, action) => {
     case LOGIN_USER + LOADING:
       return { ...state, isLoading: true, error: '' };
     case LOGIN_USER + SUCCESS:
-      return { ...state, isLoading: false, isLoggedIn: true, user: action.payload };
+      return {
+        ...state,
+        isLoading: false,
+        isLoggedIn: true,
+        user: action.payload,
+        login: '',
+        password: ''
+      };
     case LOGIN_USER + FAILURE:
       return { ...state, isLoading: false, isLoggedIn: false, error: 'Password incorrect.' };
     case LOG_OUT:
       return { ...state, isLoggedIn: false };
+    case CLEAR_ERROR:
+      return { ...state, error: '' };
     default:
       return state;
   }

@@ -16,16 +16,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF'
   },
   welcome: {
-    fontSize: 24
+    fontSize: 28
   }
 });
 
 const mapStateToProps = state => {
   return {
-    login: state.auth.login
+    login: state.auth.user.login
   };
 };
 

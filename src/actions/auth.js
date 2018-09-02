@@ -7,11 +7,17 @@ import {
   LOADING,
   LOGIN_USER,
   PASSWORD,
-  LOG_OUT
+  LOG_OUT,
+  CLEAR_ERROR
 } from './constants';
 
 export const changeLogin = payload => ({ type: CHANGE_LOGIN, payload });
-export const changePassword = payload => ({ type: CHANGE_PASSWORD, payload });
+export const changePassword = payload => dispatch => {
+  dispatch(clearError());
+  dispatch({ type: CHANGE_PASSWORD, payload });
+};
+
+export const clearError = () => ({ type: CLEAR_ERROR });
 
 const checkPassword = password => password === PASSWORD;
 
