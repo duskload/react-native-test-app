@@ -14,10 +14,11 @@ export const getStackOverflowTopics = () => dispatch => {
   axios
     .get(STACKOVERFLOW_URL)
     .then(response => {
-      dispatch(dataLoadSuccess(response.data));
+      const result = response.data.items;
+      dispatch(dataLoadSuccess(result));
     })
-    .catch(error => {
-      dispatch(dataLoadError(error.message));
+    .catch(err => {
+      dispatch(dataLoadError(err.message));
     });
 };
 

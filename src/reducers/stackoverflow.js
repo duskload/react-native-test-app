@@ -17,7 +17,11 @@ export default (state = initialState, action) => {
     case LOAD_STACKOVERFLOW_DATA_RESPONSE:
       return { ...state, isLoading: false, data: action.payload };
     case LOAD_STACKOVERFLOW_DATA_ERROR:
-      return { ...state, isLoading: false, error: action.payload };
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
     default:
       return state;
   }

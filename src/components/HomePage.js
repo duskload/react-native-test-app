@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -11,6 +13,10 @@ class HomePage extends Component {
     );
   }
 }
+
+HomePage.propTypes = {
+  login: PropTypes.string
+};
 
 const styles = StyleSheet.create({
   container: {

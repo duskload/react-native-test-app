@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
 
 const Spinner = ({ size, style }) => {
@@ -9,8 +11,14 @@ const Spinner = ({ size, style }) => {
   );
 };
 
+Spinner.propTypes = {
+  size: PropTypes.string,
+  style: PropTypes.object
+};
+
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center'
   }

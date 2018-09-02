@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -14,13 +16,17 @@ class LogOut extends Component {
         <View>
           <Text style={styles.goodbye}>Good Bye</Text>
         </View>
-        <Button onPress={this.handleLogOut} textColor={{ color: '#000' }}>
+        <Button onPress={this.handleLogOut} textStyle={{ color: '#000' }}>
           Log Out
         </Button>
       </View>
     );
   }
 }
+
+LogOut.propTypes = {
+  logOut: PropTypes.func
+};
 
 const styles = StyleSheet.create({
   container: {

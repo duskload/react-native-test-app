@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import { StyleSheet, TextInput, View } from 'react-native';
 import AppIcon from './Icon';
 
@@ -20,6 +22,14 @@ const Input = ({ secureTextEntry, onChangeText, value, placeholder, iconName }) 
       />
     </View>
   );
+};
+
+Input.propTypes = {
+  secureTextEntry: PropTypes.bool,
+  onChangeText: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  iconName: PropTypes.string
 };
 
 const styles = StyleSheet.create({

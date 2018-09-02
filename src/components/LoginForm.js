@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -44,6 +46,16 @@ class LoginForm extends Component {
     );
   }
 }
+
+LoginForm.propTypes = {
+  login: PropTypes.string,
+  password: PropTypes.string,
+  error: PropTypes.string,
+  isLoading: PropTypes.bool,
+  loginUser: PropTypes.func,
+  changePassword: PropTypes.func,
+  changeLogin: PropTypes.func
+};
 
 const styles = StyleSheet.create({
   container: {
