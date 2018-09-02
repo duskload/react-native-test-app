@@ -1,13 +1,30 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
+import { connect } from 'react-redux';
+import { ListItem } from 'native-base';
 
-export default class StackOverflow extends Component {
+import AppList from './common/AppList';
+import Spinner from './common/Spinner';
+
+import { getStackOverflowTopics } from '../actions/stackoverflow';
+
+class StackOverflow extends Component {
+  componentDidMount() {
+    this.props.getStackOverflowTopics();
+  }
+
+  renderListItems = () => {
+    if (!this.props.data) return;
+    return this.props.data.items.map(item => {
+      return (
+        <ListItem key={item.title}>
+          <Text>{item.title}</Text>
+        </ListItem>
+      );
+    });
+  };
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>StackOverflow!</Text>
-      </View>
-    );
+    return this.props.isLoading ? <Spinner /> : <AppList>{this.renderListItems()}</AppList>;
   }
 }
 
@@ -22,3 +39,16 @@ const styles = StyleSheet.create({
     fontSize: 24
   }
 });
+
+const mapStateToProps = state => {
+  return {
+    data: state.stackoverflow.data,
+    isLoading: state.stackoverflow.isLoading,
+    error: state.stackoverflow.error
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { getStackOverflowTopics }
+)(StackOverflow);

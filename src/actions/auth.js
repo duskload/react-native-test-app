@@ -16,24 +16,28 @@ export const changePassword = payload => ({ type: CHANGE_PASSWORD, payload });
 const checkPassword = password => password === PASSWORD;
 
 export const loginUser = (login, password) => dispatch => {
-  dispatch(showLoader());
+  dispatch(showLoader(LOGIN_USER + LOADING));
   setTimeout(() => {
     const isPasswordCorrect = checkPassword(password);
     if (isPasswordCorrect) {
-      dispatch(userLoginSuccess());
+      const user = { login, password };
+      dispatch(userLoginSuccess(user));
     } else {
       dispatch(userLoginFailure());
     }
-  }, 2000);
+  }, 1500);
 };
 
-export const userLoginSuccess = () => dispatch => {
-  dispatch({ type: LOGIN_USER + SUCCESS });
+export const userLoginSuccess = user => dispatch => {
+  dispatch({ type: LOGIN_USER + SUCCESS, payload: user });
   Actions.main();
 };
 
-export const logOut = () => ({ type: LOG_OUT });
+export const logOut = () => dispatch => {
+  dispatch({ type: LOG_OUT });
+  Actions.login();
+};
 
 export const userLoginFailure = () => ({ type: LOGIN_USER + FAILURE });
 
-export const showLoader = () => ({ type: LOGIN_USER + LOADING });
+export const showLoader = type => ({ type });

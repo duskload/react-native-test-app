@@ -4,7 +4,8 @@ import {
   CHANGE_PASSWORD,
   SUCCESS,
   LOADING,
-  FAILURE
+  FAILURE,
+  LOG_OUT
 } from '../actions/constants';
 
 const initialState = {
@@ -12,7 +13,8 @@ const initialState = {
   password: '',
   error: '',
   isLoggedIn: false,
-  isLoading: false
+  isLoading: false,
+  user: null
 };
 
 export default (state = initialState, action) => {
@@ -24,9 +26,11 @@ export default (state = initialState, action) => {
     case LOGIN_USER + LOADING:
       return { ...state, isLoading: true, error: '' };
     case LOGIN_USER + SUCCESS:
-      return { ...state, isLoading: false, isLoggedIn: true };
+      return { ...state, isLoading: false, isLoggedIn: true, user: action.payload };
     case LOGIN_USER + FAILURE:
       return { ...state, isLoading: false, isLoggedIn: false, error: 'Password incorrect.' };
+    case LOG_OUT:
+      return { ...state, isLoggedIn: false };
     default:
       return state;
   }

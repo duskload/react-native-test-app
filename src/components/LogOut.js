@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Actions } from 'react-native-router-flux';
-
+import { connect } from 'react-redux';
+import { logOut } from '../actions/auth';
 import Button from './common/Button';
 
-export default class LogOut extends Component {
-  handleLogOut = () => { Actions.login(); };
+class LogOut extends Component {
+  handleLogOut = () => this.props.logOut();
   render() {
     return (
       <View style={styles.container}>
@@ -22,3 +22,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
+
+export default connect(
+  null,
+  { logOut }
+)(LogOut);
