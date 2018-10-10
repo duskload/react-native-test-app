@@ -17,7 +17,7 @@ $ cd react-native-test-app && npm i
 
 1. Android Studio installed
 2. Android Studio Emulator launched / real Android device connected to computer via USB 
-3. 
+
 ### Start an app
 
 ```bash
