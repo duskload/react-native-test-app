@@ -3,11 +3,13 @@ Simple mobile app built with react-native and Redux
 
 ## Install
 
+```bash
 # Clone the repository
 $ git clone https://github.com/duskload/react-native-test-app
 
 # Install
 $ cd react-native-test-app && npm i
+```
 
 ## Launch
 
