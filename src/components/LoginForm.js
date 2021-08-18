@@ -1,50 +1,70 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { StyleSheet, Text, View } from 'react-native';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm, Controller } from 'react-hook-form';
 
 import { Input, Button, Spinner } from './common';
+import { loginUser } from '../actions/auth';
 
-import { loginUser, changePassword, changeLogin } from '../actions/auth';
+function LoginForm({ navigation }) {
+  const dispatch = useDispatch();
+  const auth = useSelector(state => state.auth);
+  const { error, isLoading } = auth;
 
-class LoginForm extends Component {
-  handleLogin = () => this.props.loginUser(this.props.login, this.props.password);
-  onLoginChange = value => this.props.changeLogin(value);
-  onPasswordChange = value => this.props.changePassword(value);
+  const { control, handleSubmit } = useForm();
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome!</Text>
-        <View style={styles.loginForm}>
-          <Input
-            iconName="user"
-            placeholder="username"
-            onChangeText={this.onLoginChange}
-            value={this.props.login}
-          />
+  const onSubmit = ({ username, password }) => {
+    dispatch(loginUser(username, password, navigation));
+  };
 
-          <Input
-            iconName="lock"
-            placeholder="password"
-            secureTextEntry
-            onChangeText={this.onPasswordChange}
-            value={this.props.password}
-          />
+  return (
+    <View style={styles.container}>
+      <Text style={styles.welcome}>Welcome!</Text>
+      <View style={styles.loginForm}>
+        <Controller
+          name="username"
+          control={control}
+          render={({ field: { onChange, value } }) => {
+            return (
+              <Input
+                onChangeText={onChange}
+                value={value}
+                iconName="user"
+                placeholder="username"
+              />
+            );
+          }}
+        />
 
-          <Text style={styles.errorCodeStyle}>{this.props.error}</Text>
-          <View style={{ marginTop: 25 }}>
-            {this.props.isLoading ? (
-              <Spinner />
-            ) : (
-              <Button onPress={this.handleLogin}>Log In</Button>
-            )}
-          </View>
+        <Controller
+          name="password"
+          control={control}
+          render={({ field: { onChange, value } }) => {
+            return (
+              <Input
+                iconName="lock"
+                placeholder="password"
+                secureTextEntry
+                onChangeText={onChange}
+                value={value}
+              />
+            );
+          }}
+        />
+
+        <Text style={styles.errorCodeStyle}>{error}</Text>
+        <View style={{ marginTop: 25 }}>
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <Button onPress={handleSubmit(onSubmit)}>Log In</Button>
+          )}
         </View>
       </View>
-    );
-  }
+    </View>
+  );
 }
 
 LoginForm.propTypes = {
@@ -54,7 +74,7 @@ LoginForm.propTypes = {
   isLoading: PropTypes.bool,
   loginUser: PropTypes.func,
   changePassword: PropTypes.func,
-  changeLogin: PropTypes.func
+  changeLogin: PropTypes.func,
 };
 
 const styles = StyleSheet.create({
@@ -62,35 +82,23 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5FCFF',
   },
   welcome: {
     marginBottom: 25,
-    fontSize: 28
+    fontSize: 28,
   },
   loginForm: {
     display: 'flex',
     justifyContent: 'center',
     paddingTop: 20,
     alignItems: 'center',
-    width: '100%'
+    width: '100%',
   },
   errorCodeStyle: {
     color: 'red',
-    marginTop: 3
-  }
+    marginTop: 3,
+  },
 });
 
-const mapStateToProps = state => {
-  return {
-    login: state.auth.login,
-    password: state.auth.password,
-    error: state.auth.error,
-    isLoading: state.auth.isLoading
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  { loginUser, changePassword, changeLogin }
-)(LoginForm);
+export default LoginForm;

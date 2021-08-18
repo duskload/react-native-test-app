@@ -2,9 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { StyleSheet, TextInput, View } from 'react-native';
+
 import AppIcon from './Icon';
 
-const Input = ({ secureTextEntry, onChangeText, value, placeholder, iconName }) => {
+const Input = ({
+  secureTextEntry,
+  onChangeText,
+  value,
+  placeholder,
+  iconName,
+}) => {
   return (
     <View style={styles.container}>
       {iconName && (
@@ -29,7 +36,7 @@ Input.propTypes = {
   onChangeText: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
-  iconName: PropTypes.string
+  iconName: PropTypes.string,
 };
 
 const styles = StyleSheet.create({
@@ -39,7 +46,7 @@ const styles = StyleSheet.create({
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   input: {
     height: 40,
@@ -47,15 +54,15 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
     width: '75%',
-    padding: 5
+    padding: 5,
   },
   text: {
     margin: 10,
-    fontSize: 24
+    fontSize: 24,
   },
   iconContainer: {
-    marginRight: 7
-  }
+    marginRight: 7,
+  },
 });
 
 export default Input;

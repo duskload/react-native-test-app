@@ -1,38 +1,52 @@
 import React from 'react';
-import { Scene, Router, Stack } from 'react-native-router-flux';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import LoginForm from './components/LoginForm';
 import HomePage from './components/HomePage';
-import Sidebar from './components/Sidebar';
 import StackOverflow from './components/StackOverflow';
 import LogOut from './components/LogOut';
 
-import { Icon } from './components/common';
+const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
-const DrawerIcon = () => <Icon name="bars" color="grey" />;
-
-export default () => {
-  return (
-    <Router titleStyle={{ alignSelf: 'center', fontWeight: '200' }}>
-      <Stack key="root" hideNavBar>
-        <Scene key="auth" hideNavBar>
-          <Scene key="login" component={LoginForm} />
-          <Scene hideNavBar key="main">
-            <Scene
-              hideNavBar
-              key="drawer"
-              drawer
-              drawerIcon={DrawerIcon}
-              contentComponent={Sidebar}
-              drawerPosition="left"
-            >
-              <Scene key="home" title="Home" component={HomePage} initial />
-              <Scene key="stack" title="StackOverflow" component={StackOverflow} />
-              <Scene key="logout" title="Log Out" component={LogOut} />
-            </Scene>
-          </Scene>
-        </Scene>
-      </Stack>
-    </Router>
-  );
+export const ScreenNames = {
+  Login: 'Login',
+  Main: 'Main',
+  Home: 'Home',
+  StackOverflow: 'Stackoverflow',
+  Logout: 'Logout',
 };
+
+function Main() {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name={ScreenNames.Home} component={HomePage} />
+      <Drawer.Screen
+        name={ScreenNames.StackOverflow}
+        component={StackOverflow}
+      />
+      <Drawer.Screen name={ScreenNames.Logout} component={LogOut} />
+    </Drawer.Navigator>
+  );
+}
+
+const commonOptions = { headerShown: false };
+
+export default () => (
+  <NavigationContainer>
+    <Stack.Navigator initialRouteName={ScreenNames.Login}>
+      <Stack.Screen
+        name={ScreenNames.Login}
+        component={LoginForm}
+        options={commonOptions}
+      />
+      <Stack.Screen
+        name={ScreenNames.Main}
+        component={Main}
+        options={commonOptions}
+      />
+    </Stack.Navigator>
+  </NavigationContainer>
+);

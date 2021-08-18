@@ -13,15 +13,15 @@ const Spinner = ({ size, style }) => {
 
 Spinner.propTypes = {
   size: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
 };
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     justifyContent: 'center',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
 
 export default Spinner;

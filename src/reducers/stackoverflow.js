@@ -1,13 +1,13 @@
 import {
   LOAD_STACKOVERFLOW_DATA_RESPONSE,
   LOAD_STACKOVERFLOW_DATA_REQUEST,
-  LOAD_STACKOVERFLOW_DATA_ERROR
+  LOAD_STACKOVERFLOW_DATA_ERROR,
 } from '../actions/constants';
 
 const initialState = {
   data: null,
   error: '',
-  isLoading: false
+  isLoading: false,
 };
 
 export default (state = initialState, action) => {
@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        error: action.payload
+        error: action.payload,
       };
     default:
       return state;

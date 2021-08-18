@@ -1,31 +1,34 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { logOut } from '../actions/auth';
 
 import { Button } from './common';
 
-class LogOut extends Component {
-  handleLogOut = () => this.props.logOut();
-  render() {
-    return (
-      <View style={styles.container}>
-        <View>
-          <Text style={styles.goodbye}>Good Bye</Text>
-        </View>
-        <Button onPress={this.handleLogOut} textStyle={{ color: '#000' }}>
-          Log Out
-        </Button>
+function LogOut({ navigation }) {
+  const dispatch = useDispatch()
+
+  const onLogOut = () => {
+    dispatch(logOut(navigation));
+  };
+
+  return (
+    <View style={styles.container}>
+      <View>
+        <Text style={styles.goodbye}>Good Bye</Text>
       </View>
-    );
-  }
+      <Button onPress={onLogOut} textStyle={{ color: '#000' }}>
+        Log Out
+      </Button>
+    </View>
+  );
 }
 
 LogOut.propTypes = {
-  logOut: PropTypes.func
+  logOut: PropTypes.func,
 };
 
 const styles = StyleSheet.create({
@@ -33,16 +36,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   goodbye: {
     fontSize: 38,
     color: 'grey',
-    marginBottom: 50
-  }
+    marginBottom: 50,
+  },
 });
 
-export default connect(
-  null,
-  { logOut }
-)(LogOut);
+export default LogOut

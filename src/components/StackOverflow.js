@@ -5,7 +5,7 @@ import { StyleSheet, FlatList, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { ListItem } from 'react-native-elements';
 
-import { AppList, Spinner, Button, Icon } from './common';
+import { Spinner, Button, Icon } from './common';
 
 import { getStackOverflowTopics } from '../actions/stackoverflow';
 
@@ -22,22 +22,22 @@ class StackOverflow extends Component {
     return (
       <ListItem
         key={item.title}
-        title={item.title}
-        containerStyle={{ backgroundColor: isEven(index) ? '#ddd' : '#fff' }}
-        hideChevron
-      />
+        containerStyle={{ backgroundColor: isEven(index) ? '#ddd' : '#fff' }}>
+        <ListItem.Content>
+          <ListItem.Title>{item.title}</ListItem.Title>
+        </ListItem.Content>
+      </ListItem>
     );
   };
 
   renderFlatList = () => {
+    console.log('data', this.props.data);
     return (
-      <AppList>
-        <FlatList
-          data={this.props.data}
-          renderItem={this.renderListItem}
-          keyExtractor={item => item.title}
-        />
-      </AppList>
+      <FlatList
+        data={this.props.data}
+        renderItem={this.renderListItem}
+        keyExtractor={item => item.title}
+      />
     );
   };
   render() {
@@ -51,7 +51,11 @@ class StackOverflow extends Component {
         </View>
       );
     }
-    return this.props.isLoading ? <Spinner style={{ flex: 1 }} /> : this.renderFlatList();
+    return this.props.isLoading ? (
+      <Spinner style={{ flex: 1 }} />
+    ) : (
+      this.renderFlatList()
+    );
   }
 }
 
@@ -59,32 +63,36 @@ StackOverflow.propTypes = {
   data: PropTypes.array,
   isLoading: PropTypes.bool,
   error: PropTypes.string,
-  getStackOverflowTopics: PropTypes.func
+  getStackOverflowTopics: PropTypes.func,
 };
 
 const styles = StyleSheet.create({
-  errorView: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' },
+  errorView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
   errorText: {
     color: 'red',
     fontSize: 16,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   refreshButton: {
     marginTop: 20,
     borderColor: '#000',
-    borderWidth: 1
-  }
+    borderWidth: 1,
+  },
 });
 
 const mapStateToProps = state => {
   return {
     data: state.stackoverflow.data,
     isLoading: state.stackoverflow.isLoading,
-    error: state.stackoverflow.error
+    error: state.stackoverflow.error,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { getStackOverflowTopics }
-)(StackOverflow);
+export default connect(mapStateToProps, { getStackOverflowTopics })(
+  StackOverflow,
+);

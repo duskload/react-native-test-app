@@ -4,5 +4,5 @@ import stackoverflow from './stackoverflow';
 
 export default combineReducers({
   auth,
-  stackoverflow
+  stackoverflow,
 });

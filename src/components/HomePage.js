@@ -15,7 +15,7 @@ class HomePage extends Component {
 }
 
 HomePage.propTypes = {
-  login: PropTypes.string
+  login: PropTypes.string,
 };
 
 const styles = StyleSheet.create({
@@ -23,20 +23,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5FCFF',
   },
   welcome: {
-    fontSize: 28
-  }
+    fontSize: 28,
+  },
 });
 
 const mapStateToProps = state => {
   return {
-    login: state.auth.user.login
+    login: state.auth.user.login,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(HomePage);
+export default connect(mapStateToProps, null)(HomePage);
